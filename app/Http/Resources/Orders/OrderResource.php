@@ -6,7 +6,7 @@ use App\Http\Resources\Foods\FoodResource;
 use App\Models\Food;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResourse extends JsonResource
+class OrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
