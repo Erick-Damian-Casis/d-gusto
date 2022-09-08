@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use Illuminate\Http\Request;
 
 class FoodsController extends Controller
@@ -13,7 +14,7 @@ class FoodsController extends Controller
      */
     public function index()
     {
-        //
+        $foods = Food::get();
     }
 
     /**
@@ -24,7 +25,11 @@ class FoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $food = new Food();
+        $food->name = $request->input('name');
+        $food->cost = $request->input('cost');
+        $food->state = $request->input('state');
+        $food->special = $request->input('special');
     }
 
     /**
@@ -33,7 +38,7 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Food $food)
     {
         //
     }
@@ -45,9 +50,12 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Food $food)
     {
-        //
+        $food->name = $request->input('name');
+        $food->cost = $request->input('cost');
+        $food->state = $request->input('state');
+        $food->special = $request->input('special');
     }
 
     /**
@@ -56,8 +64,8 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Food $food)
     {
-        //
+        $food->delete();
     }
 }

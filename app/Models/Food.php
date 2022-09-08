@@ -15,8 +15,8 @@ class Food extends Model
         'state',
         'special',
     ];
-    //relationship
 
+    //relationship
     function orders(){
         return $this->hasMany(Order::class);
     }
