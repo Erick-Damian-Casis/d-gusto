@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Foods;
+namespace App\Http\Resources\Orders;
 
+use App\Http\Resources\Foods\FoodResource;
+use App\Models\Food;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FoodResource extends JsonResource
+class OrderResourse extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +17,9 @@ class FoodResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=> $this->id,
-            'name'=> $this->cost,
-            'state'=> $this->state,
-            'special'=> $this->special,
-            ];
+            'spec'=> $this->spec,
+            'amount'=> $this->amount,
+            'food'=>FoodResource::make($this->food),
+        ];
     }
 }
