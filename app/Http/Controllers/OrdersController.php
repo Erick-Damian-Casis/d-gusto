@@ -28,6 +28,7 @@ class OrdersController extends Controller
         $order->food()->associate(Food::find($request->input('food.id')));
         $order->spec = $request->input('spec');
         $order->amount = $request->input('amount');
+        $order->save();
         return (new OrderResource($order))->additional([
             'msg'=>[
                 'summary' => 'create order success',
@@ -53,6 +54,7 @@ class OrdersController extends Controller
         $order->food()->associate(Food::find($request->input('food.id')));
         $order->spec = $request->input('spec');
         $order->amount = $request->input('amount');
+        $order->save();
         return (new OrderResource($order))->additional([
             'msg'=>[
                 'summary' => 'update order success',

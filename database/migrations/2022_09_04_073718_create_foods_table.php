@@ -18,7 +18,7 @@ class CreateFoodsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('name');
-            $table->decimal('cost', $precision = 3, $scale = 2);
+            $table->decimal('cost');
             $table->boolean('state');
             $table->boolean('special');
         });

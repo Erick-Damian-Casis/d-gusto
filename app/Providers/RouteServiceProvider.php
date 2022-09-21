@@ -38,6 +38,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
+            $this->mapApiRoutesPrivates();
+
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
@@ -47,6 +49,16 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+    }
+
+    protected function mapApiRoutesPrivates()
+    {
+        $prefix = "api/v1/private";
+        $path = "routes/$prefix";
+
+        Route::prefix($prefix)
+            ->middleware(['api'])
+            ->group(base_path("${path}/d-gusto.php"));
     }
 
     /**

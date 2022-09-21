@@ -16,7 +16,8 @@ class FoodResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'name'=> $this->cost,
+            'name'=> $this->name,
+            'cost'=> $this->cost,
             'state'=> $this->state,
             'special'=> $this->special,
             ];

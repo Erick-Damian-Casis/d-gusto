@@ -29,6 +29,7 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
+        $food->save();
         return (new FoodResource($food))->additional([
             'msg'=>[
                 'summary' => 'create food success',
@@ -55,6 +56,7 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
+        $food->save();
         return (new FoodResource($food))->additional([
             'msg'=>[
                 'summary' => 'update food success',
