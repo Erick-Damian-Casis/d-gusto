@@ -6,6 +6,7 @@ use App\Http\Resources\Foods\FoodCollection;
 use App\Http\Resources\Foods\FoodResource;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FoodsController extends Controller
 {
@@ -27,9 +28,13 @@ class FoodsController extends Controller
         $food = new Food();
         $food->name = $request->input('name');
         $food->cost = $request->input('cost');
-        $food->state = $request->input('state');
-        $food->special = $request->input('special');
+//      $food->state = $request->input('state');
+//      $food->special = $request->input('special');
+        if ($request->hasFile('image')){
+        $food->image = $request->file('image')->store('images');
+        }
         $food->save();
+
         return (new FoodResource($food))->additional([
             'msg'=>[
                 'summary' => 'create food success',
@@ -56,6 +61,7 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
+        $food->url = $request->input('url');
         $food->save();
         return (new FoodResource($food))->additional([
             'msg'=>[

@@ -20,6 +20,7 @@ class FoodResource extends JsonResource
             'cost'=> $this->cost,
             'state'=> $this->state,
             'special'=> $this->special,
+            'image'=> $this->image,
             ];
     }
 }
