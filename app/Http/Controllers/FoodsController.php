@@ -28,8 +28,8 @@ class FoodsController extends Controller
         $food = new Food();
         $food->name = $request->input('name');
         $food->cost = $request->input('cost');
-//      $food->state = $request->input('state');
-//      $food->special = $request->input('special');
+        $food->state = $request->input('state');
+        $food->special = $request->input('special');
         if ($request->hasFile('image')){
         $food->image = $request->file('image')->store('images');
         }
