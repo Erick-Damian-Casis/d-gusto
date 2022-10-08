@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->softDeletes();
             $table->foreignId('food_id')
                 ->constrained('foods');
-            $table->text('spec');
+            $table->text('spec')->nullable();
             $table->double('amount');
         });
     }

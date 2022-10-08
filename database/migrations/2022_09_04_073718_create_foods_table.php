@@ -17,11 +17,11 @@ class CreateFoodsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('name')->nullable();
-            $table->decimal('cost')->nullable();
-            $table->boolean('state')->nullable();
-            $table->boolean('special')->nullable();
-            $table->string('image')->nullable();
+            $table->string('name');
+            $table->decimal('cost');
+            $table->boolean('state');
+            $table->boolean('special');
+            $table->string('image');
         });
     }
 
