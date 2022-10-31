@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\V1\Foods\StoreFoodRequest;
+use App\Http\Requests\V1\Foods\UpdateFoodRequest;
 use App\Http\Resources\Foods\FoodCollection;
 use App\Http\Resources\Foods\FoodResource;
 use App\Models\Food;
@@ -23,7 +25,7 @@ class FoodsController extends Controller
     ])->response()->setStatusCode(200);
     }
 
-    public function store(Request $request)
+    public function store(StoreFoodRequest $request)
     {
         $food = new Food();
         $food->name = $request->input('name');
@@ -31,7 +33,8 @@ class FoodsController extends Controller
         $food->state = $request->input('state');
         $food->special = $request->input('special');
         if ($request->hasFile('image')){
-        $food->image = $request->file('image')->store('images');
+            $food->image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('image',$food->image);
         }
         $food->save();
 
@@ -55,14 +58,18 @@ class FoodsController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function update(Request $request, Food $food)
+    public function update(UpdateFoodRequest $request, Food $food)
     {
         $food->name = $request->input('name');
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
-        $food->url = $request->input('url');
+        if ($request->hasFile('image')){
+            $food->image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('image',$food->image);
+        }
         $food->save();
+
         return (new FoodResource($food))->additional([
             'msg'=>[
                 'summary' => 'update food success',

@@ -13,7 +13,7 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'food.id' =>  ['integer', 'required'],
+            'amount' =>  ['required'],
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'food.id' =>  'Id de la comida',
+            'amount' =>  'cantidad de pedido por unidad',
         ];
     }
 }

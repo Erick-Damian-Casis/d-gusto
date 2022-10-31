@@ -13,7 +13,7 @@ class StoreFoodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class StoreFoodRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' =>  ['required',],
+            'cost' =>  ['required'],
+            'state' =>  ['required'],
+            'special' =>  ['required'],
+            'image' =>  ['required'],
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'name' =>  'nombre de la comida',
+            'cost' =>  'Precio de la comida',
+            'state' =>  'Disponibilidad de la comida',
+            'special' =>  'Comida especial',
+            'image' =>  'imagen de la comida',
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\V1\Orders\StoreOrderRequest;
+use App\Http\Requests\V1\Orders\UpdateOrderRequest;
 use App\Http\Resources\Orders\OrderCollection;
 use App\Http\Resources\Orders\OrderResource;
 use App\Models\Food;
@@ -22,7 +24,7 @@ class OrdersController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
         $order = new Order();
         $order->food()->associate(Food::find($request->input('food.id')));
@@ -49,7 +51,7 @@ class OrdersController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
         $order->food()->associate(Food::find($request->input('food.id')));
         $order->spec = $request->input('spec');
