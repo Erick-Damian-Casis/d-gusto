@@ -8,6 +8,7 @@ use App\Http\Resources\Orders\OrderCollection;
 use App\Http\Resources\Orders\OrderResource;
 use App\Models\Food;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -30,6 +31,7 @@ class OrdersController extends Controller
         $order->food()->associate(Food::find($request->input('food.id')));
         $order->spec = $request->input('spec');
         $order->amount = $request->input('amount');
+        $order->order_at = Carbon::now()->toDateTimeString();
         $order->save();
         return (new OrderResource($order))->additional([
             'msg'=>[

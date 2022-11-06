@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
+            $table->dateTime('order_at');
             $table->foreignId('food_id')
                 ->constrained('foods');
             $table->text('spec')->nullable();

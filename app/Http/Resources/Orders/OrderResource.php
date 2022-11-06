@@ -17,8 +17,10 @@ class OrderResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'spec'=> $this->spec,
             'amount'=> $this->amount,
+            'orderAt'=> $this->order_at,
             'food'=>FoodResource::make($this->food),
         ];
     }
