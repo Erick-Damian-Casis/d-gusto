@@ -6,6 +6,7 @@ use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -26,6 +27,7 @@ class AuthController extends Controller
                 'message'=>'invalid credentials!'
             ], 404);
         }
+
         $user =Auth::user();
         $token= $user->createToken('token')->plainTextToken ;
         $cookie = cookie('jwt', $token, 60*24);
@@ -37,6 +39,13 @@ class AuthController extends Controller
 
     public function user($method, $parameters)
     {
-        return 'authenticated user';
+        return Auth::user();
+    }
+
+    public function logout(){
+        $cookie = Cookie::forget('jwt');
+        return response([
+            'message'=>'success!'
+        ])->withCookie($cookie);
     }
 }
