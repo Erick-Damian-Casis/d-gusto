@@ -9,6 +9,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('orders', OrdersController::class);
-Route::apiResource('foods', FoodsController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('orders', OrdersController::class);
+    Route::apiResource('foods', FoodsController::class);
+});
+
 

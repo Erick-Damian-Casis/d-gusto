@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             $this->mapApiRoutesPrivates();
+            $this->mapApiRoutesPublic();
 
             Route::prefix('api')
                 ->middleware('api')
@@ -59,6 +60,16 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix($prefix)
             ->middleware(['api'])
             ->group(base_path("${path}/d-gusto.php"));
+    }
+
+    protected function mapApiRoutesPublic()
+    {
+        $prefix = "api/v1/public";
+        $path = "routes/$prefix";
+
+        Route::prefix($prefix)
+            ->middleware(['api'])
+            ->group(base_path("${path}/auth.php"));
     }
 
     /**
