@@ -29,12 +29,11 @@ class AuthController extends Controller
         }
 
         $user =Auth::user();
-        $token= $user->createToken('token')->plainTextToken ;
+        $token= $user->createToken('token')->plainTextToken;
         $cookie = cookie('jwt', $token, 60*24);
         return response([
             'message'=>'success!'
         ])->withCookie($cookie);
-
     }
 
     public function user($method, $parameters)
