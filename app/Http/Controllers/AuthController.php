@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -30,21 +29,20 @@ class AuthController extends Controller
 
         $user =Auth::user();
         $token= $user->createToken('token')->plainTextToken;
-        $cookie = cookie('jwt', $token, 60*24);
         return response([
-            'message'=>'success!'
-        ])->withCookie($cookie);
+            'message'=>'success!',
+            'token'=>$token
+        ]);
     }
 
-    public function user($method, $parameters)
-    {
+    public function user(){
         return Auth::user();
     }
 
     public function logout(){
-        $cookie = Cookie::forget('jwt');
+        auth()->user()->tokens()->delete();
         return response([
             'message'=>'success!'
-        ])->withCookie($cookie);
+        ]);
     }
 }
