@@ -29,10 +29,12 @@ class AuthController extends Controller
 
         $user =Auth::user();
         $token= $user->createToken('token')->plainTextToken;
+        $cookie = cookie('jwt', $token, 60*24); // 1 day
+
         return response([
             'message'=>'success!',
             'token'=>$token
-        ]);
+        ])->withCookie($cookie);
     }
 
     public function user(){
@@ -40,9 +42,10 @@ class AuthController extends Controller
     }
 
     public function logout(){
+        $cookie = Cookie::forget('jwt');
         auth()->user()->tokens()->delete();
         return response([
-            'message'=>'success!'
-        ]);
+            'message'=>'Success!'
+        ])->withCookie($cookie);
     }
 }
