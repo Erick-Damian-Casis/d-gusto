@@ -6,15 +6,42 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\AuthController;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('orders', OrdersController::class);
-    Route::apiResource('foods', FoodsController::class);
+
+    // visualizar comidas
+    Route::group(['middleware' => ['permission:view_foods']], function () {
+        Route::get('foods', [FoodsController::class, 'index']);
+        Route::get('foods/{food}', [FoodsController::class, 'show']);
+
+    });
+
+    // visualizar ordenes
+    Route::group(['middleware' => ['permission:view_orders']], function () {
+        Route::get('orders', [OrdersController::class, 'index']);
+        Route::get('orders/{order}', [OrdersController::class, 'show']);
+    });
+
+    // modificar comidas
+    Route::group(['middleware' => ['permission:modify_foods']], function () {
+        Route::post('foods', [FoodsController::class, 'store']);
+        Route::delete('foods/{food}', [FoodsController::class, 'destroy']);
+        Route::put('foods/{food}', [FoodsController::class, 'update']);
+    });
+
+    // modificar ordenes
+    Route::group(['middleware' => ['permission:modify_orders']], function () {
+        Route::delete('orders/{order}', [OrdersController::class, 'destroy']);
+        Route::put('orders/{order}', [OrdersController::class, 'update']);
+    });
+
+    // Realizar orden
+    Route::group(['middleware' => ['create_orders']], function () {
+        Route::post('orders', [OrdersController::class, 'store']);
+    });
+
+    // cerrar sesion
     Route::get('logout',[AuthController::class, 'logout']);
 });
 
-Route::get('/foods', [FoodsController::class, 'show'])->name('foods');
+

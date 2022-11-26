@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class FoodsController extends Controller
 {
-
     public function index()
     {
         $foods = Food::get();
@@ -28,6 +27,7 @@ class FoodsController extends Controller
     public function store(StoreFoodRequest $request)
     {
         $food = new Food();
+        $food->user = $request->input('user');
         $food->name = $request->input('name');
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');

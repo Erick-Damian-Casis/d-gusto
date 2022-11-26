@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -16,8 +15,11 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password =  Hash::make($request->input('password'));
         $user->whatsapp = $request->input('whatsapp');
+        $user->assignRole('client');
         $user->save();
-        return $user;
+        return response([
+            'message'=>'Success Register'
+        ], 404);
     }
 
     public function login(Request $request){
@@ -26,22 +28,18 @@ class AuthController extends Controller
                 'message'=>'invalid credentials!'
             ], 404);
         }
-
         $user =Auth::user();
         $token= $user->createToken('token')->plainTextToken;
-        $cookie = cookie('jwt', $token, 60*24); // 1 day
-
-        return response([
-            'message'=> 'Success',
-            'user'=>$user
-        ])->withCookie($cookie);
+        return response()->json([
+            "token"=>$token,
+            "user"=>$user->id
+        ]);
     }
 
-    public function logout(Request $request){
-        $cookie = Cookie::forget('jwt');
-//        $request->user()->tokens()->delete();
+    public function logout(){
+        auth()->user()->tokens()->delete();
         return response([
-            'message'=>'Success!'
-        ])->withCookie($cookie);
+            'message'=>'Success logout'
+        ]);
     }
 }

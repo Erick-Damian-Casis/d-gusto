@@ -24,16 +24,17 @@ class StoreFoodRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>  ['required',],
+            'user' =>  ['required'],
+            'name' =>  ['required'],
             'cost' =>  ['required'],
             'state' =>  ['required'],
             'special' =>  ['required'],
-            'image' =>  ['required'],
         ];
     }
     public function attributes()
     {
         return [
+            'user' =>  'nombre de la comida',
             'name' =>  'nombre de la comida',
             'cost' =>  'Precio de la comida',
             'state' =>  'Disponibilidad de la comida',

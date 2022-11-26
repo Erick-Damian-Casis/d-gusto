@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
             'email'=> 'erick_casis1998@hotmail.com',
             'password'=> '159632100',
             'whatsapp'=> '0979005493',
-        ])->assignRole('Chef');
+        ])->assignRole('chef');
     }
 }

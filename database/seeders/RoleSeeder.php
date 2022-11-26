@@ -15,19 +15,19 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $role1 = Role::create(['name'=>'Chef']);
-        $role2 = Role::create(['name'=>'Client']);
+        // All roles
+        $chef = Role::create(['name'=>'chef']);
+        $client = Role::create(['name'=>'client']);
 
-        Permission::create(['name'=>'foods.index'])->syncRoles([ $role1, $role2]);
-        Permission::create(['name'=>'foods.show'])->syncRoles([ $role1, $role2]);
-        Permission::create(['name'=>'foods.create'])->assignRole($role1);
-        Permission::create(['name'=>'foods.update'])->assignRole($role1);
-        Permission::create(['name'=>'foods.destroy'])->assignRole($role1);
+        // Permission client
+        Permission::create(['name'=>'create_orders'])->assignRole($client);
 
-        Permission::create(['name'=>'orders.index'])->assignRole($role1);
-        Permission::create(['name'=>'orders.show'])->assignRole($role1);
-        Permission::create(['name'=>'orders.create'])->assignRole($role2);
-        Permission::create(['name'=>'orders.update'])->assignRole($role1);
-        Permission::create(['name'=>'orders.delete'])->assignRole($role1);
+        // Permission chef
+        Permission::create(['name'=>'view_orders'])->assignRole($chef);
+        Permission::create(['name'=>'modify_orders'])->assignRole($chef);
+        Permission::create(['name'=>'modify_foods'])->assignRole($chef);
+
+        // Permission client and chef
+        Permission::create(['name'=>'view_foods'])->syncRoles([ $chef, $client]);
     }
 }
