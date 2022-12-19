@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Realizar orden
-    Route::group(['middleware' => ['create_orders']], function () {
+    Route::group(['middleware' => ['permission:create_orders']], function () {
         Route::post('orders', [OrdersController::class, 'store']);
     });
 

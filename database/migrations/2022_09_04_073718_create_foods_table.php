@@ -17,10 +17,6 @@ class CreateFoodsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreignId('user_id')
-                ->constrained('users');
-
             $table->string('name');
             $table->decimal('cost');
             $table->boolean('state');

@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
@@ -29,11 +30,12 @@ class OrdersController extends Controller
 
     public function store(StoreOrderRequest $request)
     {
+        $user = Auth::user()->getAuthIdentifier();
         $order = new Order();
         $order->food()->associate(Food::find($request->input('food.id')));
-        $order->user()->associate(User::find($request->input('user.id')));
-        $order->spec = $request->input('spec');
+        $order->user()->associate(User::find($user));
         $order->amount = $request->input('amount');
+        $order->spec = $request->input('spec');
         $order->order_at = Carbon::now()->toDateTimeString();
         $order->save();
         return (new OrderResource($order))->additional([
@@ -59,7 +61,6 @@ class OrdersController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         $order->food()->associate(Food::find($request->input('food.id')));
-        $order->user()->associate(User::find($request->input('user.id')));
         $order->spec = $request->input('spec');
         $order->amount = $request->input('amount');
         $order->save();

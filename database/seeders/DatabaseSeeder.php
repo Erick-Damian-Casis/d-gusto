@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name'=> 'Erick Damian',
             'email'=> 'erick_casis1998@hotmail.com',
-            'password'=> '159632100',
+            'password'=> Hash::make('159632100'),
             'whatsapp'=> '0979005493',
         ])->assignRole('chef');
     }

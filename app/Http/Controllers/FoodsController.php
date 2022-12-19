@@ -8,6 +8,7 @@ use App\Http\Resources\Foods\FoodCollection;
 use App\Http\Resources\Foods\FoodResource;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class FoodsController extends Controller
@@ -27,7 +28,6 @@ class FoodsController extends Controller
     public function store(StoreFoodRequest $request)
     {
         $food = new Food();
-        $food->user = $request->input('user');
         $food->name = $request->input('name');
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
