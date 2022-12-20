@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Orders;
 
 use App\Http\Resources\Foods\FoodResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\Food;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,6 +23,7 @@ class OrderResource extends JsonResource
             'amount'=> $this->amount,
             'orderAt'=> $this->order_at,
             'food'=>FoodResource::make($this->food),
+            'user'=>UserResource::make($this->user),
         ];
     }
 }

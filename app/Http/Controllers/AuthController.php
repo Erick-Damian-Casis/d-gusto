@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,12 +30,16 @@ class AuthController extends Controller
             ], 404);
         }
         $user =Auth::user();
-        $user->hasRole('');
-        $token= $user->createToken('token')->plainTextToken;
-        return response()->json([
-            "token"=>$token,
-            "user"=>$user->name,
-        ]);
+        $token = $user->createToken('token')->plainTextToken;
+
+        return (new UserResource($user))->additional([
+            'token'=>$token,
+            'msg'=>[
+                'summary' => 'Login success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     public function logout(){
