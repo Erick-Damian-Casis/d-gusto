@@ -33,8 +33,9 @@ class FoodsController extends Controller
         $food->state = $request->input('state');
         $food->special = $request->input('special');
         if ($request->hasFile('image')){
-            $food->image = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('image',$food->image);
+            $food->image = Storage::url($request->file('image')
+                ->store('public/images')
+            );
         }
         $food->save();
 
