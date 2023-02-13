@@ -10,7 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Food extends Authenticatable
 {
-//    use HasFactory;
     use HasApiTokens, SoftDeletes, HasFactory;
 
     protected $table = 'foods';
@@ -29,5 +28,16 @@ class Food extends Authenticatable
 
     function users(){
         return $this->belongsTo(User::class);
+    }
+
+    // Casting
+    public function setImageAttribute($value)
+    {
+        return $this->attributes['image'] = "http://127.0.0.1:8000".$value;
+    }
+
+    public function setCostAttribute($value)
+    {
+        return $this->attributes['cost'] = round($value, 2);
     }
 }

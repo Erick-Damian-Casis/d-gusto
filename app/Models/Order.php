@@ -26,4 +26,11 @@ class Order extends Authenticatable
     function user(){
         return $this->belongsTo(User::class);
     }
+
+    // casting
+
+    function setOrderAtAttribute($value){
+        return $this->attributes['order_at'] = $value->format('Y-m-d');
+    }
+
 }
