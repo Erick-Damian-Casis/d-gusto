@@ -65,10 +65,6 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
-        if ($request->hasFile('image')){
-            $food->image = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('image',$food->image);
-        }
         $food->save();
 
         return (new FoodResource($food))->additional([

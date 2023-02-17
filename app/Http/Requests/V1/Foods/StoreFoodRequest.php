@@ -28,6 +28,7 @@ class StoreFoodRequest extends FormRequest
             'cost' =>  ['required'],
             'state' =>  ['required'],
             'special' =>  ['required'],
+            'image' =>  ['required'],
         ];
     }
     public function attributes()

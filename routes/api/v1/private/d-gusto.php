@@ -10,9 +10,9 @@ use App\Http\Controllers\AuthController;
 //Route::middleware('auth:sanctum')->group(function () {
     // Food
     Route::post('foods', [FoodsController::class, 'store']);
-    Route::delete('foods/{food}', [FoodsController::class, 'destroy']);
-    Route::put('foods/{food}', [FoodsController::class, 'update']);
     Route::get('foods/{food}', [FoodsController::class, 'show']);
+    Route::put('foods/{food}', [FoodsController::class, 'update']);
+    Route::delete('foods/{food}', [FoodsController::class, 'destroy']);
     // Order
     Route::delete('orders/{order}', [OrdersController::class, 'destroy']);
     Route::put('orders/{order}', [OrdersController::class, 'update']);
