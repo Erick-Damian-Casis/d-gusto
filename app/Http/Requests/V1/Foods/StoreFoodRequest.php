@@ -29,6 +29,7 @@ class StoreFoodRequest extends FormRequest
             'state' =>  ['required'],
             'special' =>  ['required'],
             'image' =>  ['required'],
+            'description' =>  ['required'],
         ];
     }
     public function attributes()
@@ -39,6 +40,7 @@ class StoreFoodRequest extends FormRequest
             'state' =>  'Disponibilidad de la comida',
             'special' =>  'Comida especial',
             'image' =>  'imagen de la comida',
+            'description' =>  'Descripcion de la comida',
         ];
     }
 }

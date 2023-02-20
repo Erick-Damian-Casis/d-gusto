@@ -32,6 +32,7 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
+        $food->description = $request->input('description');
         if ($request->hasFile('image')){
             $food->image = Storage::url($request->file('image')
                 ->store('public/images')
@@ -65,6 +66,7 @@ class FoodsController extends Controller
         $food->cost = $request->input('cost');
         $food->state = $request->input('state');
         $food->special = $request->input('special');
+        $food->description = $request->input('description');
         $food->save();
 
         return (new FoodResource($food))->additional([

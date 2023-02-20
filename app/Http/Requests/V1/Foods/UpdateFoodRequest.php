@@ -19,6 +19,7 @@ class UpdateFoodRequest extends FormRequest
             'cost' =>  ['required'],
             'state' =>  ['required'],
             'special' =>  ['required'],
+            'description' =>  ['required'],
         ];
     }
     public function attributes()
@@ -28,6 +29,7 @@ class UpdateFoodRequest extends FormRequest
             'cost' =>  'Precio de la comida',
             'state' =>  'Disponibilidad de la comida',
             'special' =>  'Comida especial',
+            'description' =>  'Descripcion de la comida',
         ];
     }
 }

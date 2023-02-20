@@ -19,6 +19,7 @@ class Food extends Authenticatable
         'state',
         'special',
         'image',
+        'description',
     ];
 
     //relationship

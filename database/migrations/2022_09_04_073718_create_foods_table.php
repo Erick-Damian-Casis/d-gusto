@@ -22,6 +22,7 @@ class CreateFoodsTable extends Migration
             $table->boolean('state');
             $table->boolean('special');
             $table->string('image');
+            $table->text('description');
         });
     }
 
