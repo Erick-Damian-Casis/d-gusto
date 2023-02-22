@@ -7,12 +7,14 @@ use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\AuthController;
 
 
-//Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
+
     // Food
     Route::post('foods', [FoodsController::class, 'store']);
     Route::get('foods/{food}', [FoodsController::class, 'show']);
     Route::put('foods/{food}', [FoodsController::class, 'update']);
     Route::delete('foods/{food}', [FoodsController::class, 'destroy']);
+
     // Order
     Route::delete('orders/{order}', [OrdersController::class, 'destroy']);
     Route::put('orders/{order}', [OrdersController::class, 'update']);
@@ -22,6 +24,6 @@ use App\Http\Controllers\AuthController;
 
     // cerrar sesion
     Route::get('logout',[AuthController::class, 'logout']);
-//});
+});
 
 
