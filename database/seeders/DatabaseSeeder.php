@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             'email'=> 'erick_casis1998@hotmail.com',
             'password'=> Hash::make('159632100'),
             'whatsapp'=> '0979005493',
-        ])->assignRole('chef');
+        ])->assignRole('admin');
     }
 }

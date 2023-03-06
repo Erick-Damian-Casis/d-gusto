@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\V1\User\RegisterRequest;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(RegisterRequest $request){
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -18,9 +19,14 @@ class AuthController extends Controller
         $user->whatsapp = $request->input('whatsapp');
         $user->assignRole('client');
         $user->save();
-        return response([
-            'message'=>'Success Register'
-        ], 404);
+        return (new UserResource($user))->additional([
+                'msg'=>[
+                    'summary' => 'Register success',
+                    'detail' => '',
+                    'code' => '200'
+                ]
+            ]
+        )->response()->setStatusCode(200);
     }
 
     public function login(Request $request){

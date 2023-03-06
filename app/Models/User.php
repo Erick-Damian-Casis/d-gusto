@@ -28,11 +28,5 @@ class User extends Authenticatable
         return $this->hasMany(Food::class);
     }
 
-    // Casting
-    public function setWhatsappAttribute($value)
-    {
-        return $this->attributes['whatsapp'] = "+593".$value;
-    }
-
     public $timestamps= false;
 }

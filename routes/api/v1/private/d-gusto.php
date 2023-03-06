@@ -8,7 +8,6 @@ use App\Http\Controllers\AuthController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-
     // Food
     Route::post('foods', [FoodsController::class, 'store']);
     Route::get('foods/{food}', [FoodsController::class, 'show']);

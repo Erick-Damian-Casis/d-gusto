@@ -16,18 +16,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         // All roles
-        $chef = Role::create(['name'=>'chef']);
-        $client = Role::create(['name'=>'client']);
-
-        // Permission client
-        Permission::create(['name'=>'create_orders'])->assignRole($client);
-
-        // Permission chef
-        Permission::create(['name'=>'view_orders'])->assignRole($chef);
-        Permission::create(['name'=>'modify_orders'])->assignRole($chef);
-        Permission::create(['name'=>'modify_foods'])->assignRole($chef);
-
-        // Permission client and chef
-        Permission::create(['name'=>'view_foods'])->syncRoles([ $chef, $client]);
+        Role::create(['name'=>'admin']);
+        Role::create(['name'=>'client']);
     }
 }
