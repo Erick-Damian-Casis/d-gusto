@@ -17,14 +17,11 @@ Route::middleware('auth:sanctum')->group(function () {
         // Order
         Route::get('orders', [OrdersController::class, 'index']);
     });
-
-    Route::group(['middleware' => ['role:admin|client']], function () {
         // Order
         Route::get('orders/{order}', [OrdersController::class, 'show']);
         Route::post('orders', [OrdersController::class, 'store']);
         Route::delete('orders/{order}', [OrdersController::class, 'destroy']);
         Route::put('orders/{order}', [OrdersController::class, 'update']);
-    });
 
     // cerrar sesion
     Route::get('logout',[AuthController::class, 'logout']);

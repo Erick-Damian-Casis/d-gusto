@@ -32,7 +32,7 @@ class OrdersController extends Controller
     {
         $user = Auth::user()->getAuthIdentifier();
         $order = new Order();
-        $order->food()->associate(Food::find($request->input('food.id')));
+        $order->food()->associate(Food::find($request->input('food')));
         $order->user()->associate(User::find($user));
         $order->amount = $request->input('amount');
         $order->spec = $request->input('spec');
@@ -60,6 +60,8 @@ class OrdersController extends Controller
 
     public function update(UpdateOrderRequest $request, Order $order)
     {
+
+        $order->user()->associate(User::find());
         $order->food()->associate(Food::find($request->input('food.id')));
         $order->spec = $request->input('spec');
         $order->amount = $request->input('amount');
